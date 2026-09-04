@@ -1,0 +1,35 @@
+{
+  "name": "everything-claude-code",
+  "owner": {
+    "name": "brandonktvo-pltc",
+    "url": "https://github.com/brandonktvo-pltc"
+  },
+  "metadata": {
+    "description": "Self-hosted marketplace for the everything-claude-code plugin.",
+    "version": "1.0.0"
+  },
+  "plugins": [
+    {
+      "name": "everything-claude-code",
+      "source": "./",
+      "description": "A complete Claude Code configuration kit: subagents, skills, slash commands, rules, hooks and cross-platform automation scripts.",
+      "version": "1.0.0",
+      "author": {
+        "name": "brandonktvo-pltc"
+      },
+      "homepage": "https://github.com/brandonktvo-pltc/Robinhood",
+      "license": "MIT",
+      "category": "workflow",
+      "keywords": [
+        "claude-code",
+        "agents",
+        "skills",
+        "hooks",
+        "tdd",
+        "code-review",
+        "security"
+      ],
+      "strict": false
+    }
+  ]
+}

@@ -18,8 +18,6 @@
     "security"
   ],
   "commands": "./commands",
-  "agents": "./agents",
   "skills": "./skills",
-  "hooks": "./hooks/hooks.json",
-  "mcpServers": "./mcp-configs/mcp-servers.json"
+  "hooks": "./hooks/hooks.json"
 }

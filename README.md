@@ -29,10 +29,15 @@ git clone https://github.com/brandonktvo-pltc/Robinhood.git
 Verify:
 
 ```bash
-/plugin           # the plugin is listed and enabled
-/agents           # nine agents available
-/help             # ten slash commands available
+claude plugin validate .                        # manifests are well formed
+claude plugin details everything-claude-code    # component inventory + token cost
 ```
+
+Expected inventory: **9 agents**, **19 skills** (9 skills + 10 commands), **5
+hooks**, 0 MCP servers. Always-on cost is roughly 1.7k tokens per session; the
+per-component breakdown is in `plugin details`.
+
+In an interactive session, `/agents` and `/help` list them.
 
 The `rules/` directory is **not** installed by the plugin — copy the ones you
 want into `~/.claude/rules/` (see [Rules](#rules)).
@@ -242,10 +247,16 @@ claude --append-system-prompt "$(cat contexts/dev.md)"
 [`mcp-configs/mcp-servers.json`](mcp-configs/mcp-servers.json) catalogues
 GitHub, filesystem, Postgres, Supabase, Playwright, Sentry, Vercel and Railway.
 
-It is a catalogue, not a manifest to apply wholesale — every enabled server adds
-tool definitions to every turn. Secrets are `${ENV_VAR}` placeholders; never
-replace one with a literal token. See
-[`mcp-configs/README.md`](mcp-configs/README.md).
+**It is deliberately not wired into `plugin.json`.** Installing the plugin
+enables nothing here — every enabled server adds tool definitions to every turn,
+and most of these need credentials you may not have. Copy the entry you want:
+
+```bash
+claude mcp add --transport http sentry https://mcp.sentry.dev/mcp
+```
+
+Secrets are `${ENV_VAR}` placeholders; never replace one with a literal token.
+See [`mcp-configs/README.md`](mcp-configs/README.md).
 
 ---
 
@@ -293,6 +304,22 @@ everything-claude-code/
 ```
 
 ---
+
+## Manifest gotchas
+
+Measured against `claude 2.1.260`, worth knowing before you fork this:
+
+| Field | Behavior |
+| --- | --- |
+| `agents: "./agents"` | **Rejected** by `claude plugin validate` |
+| `agents: ["./agents/x.md"]` | Validates, then loads **0 agents** — silent failure |
+| `agents` omitted | Auto-discovers `agents/` — **this is what the manifest does** |
+| `mcpServers: "<path>"` | Validates, loads nothing. Left out deliberately |
+
+`commands`, `skills` and `hooks` all take a path string and work as expected.
+
+`tests/plugin-structure.test.js` asserts the manifest stays in the working
+shape, because the middle row passes validation and fails quietly.
 
 ## Contributing
 

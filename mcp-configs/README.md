@@ -4,6 +4,10 @@
 wholesale. Every server you enable adds tool definitions to the context of every
 turn — enable what a project actually needs and nothing else.
 
+**This file is not referenced by `plugin.json`.** Installing the plugin adds no
+MCP servers; you enable them one at a time, per project, using the commands
+below. `tests/plugin-structure.test.js` asserts the manifest keeps out of it.
+
 ## Servers included
 
 | Server | Transport | Needs |

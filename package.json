@@ -1,0 +1,26 @@
+{
+  "name": "everything-claude-code",
+  "version": "1.0.0",
+  "description": "A complete Claude Code configuration kit: subagents, skills, slash commands, rules, hooks and cross-platform automation scripts.",
+  "license": "MIT",
+  "private": true,
+  "engines": {
+    "node": ">=18"
+  },
+  "type": "commonjs",
+  "scripts": {
+    "test": "node tests/run-all.js",
+    "setup-pm": "node scripts/setup-package-manager.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/brandonktvo-pltc/Robinhood.git"
+  },
+  "keywords": [
+    "claude-code",
+    "claude-code-plugin",
+    "agents",
+    "skills",
+    "hooks"
+  ]
+}

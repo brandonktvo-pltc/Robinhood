@@ -1,0 +1,25 @@
+{
+  "name": "everything-claude-code",
+  "version": "1.0.0",
+  "description": "A complete Claude Code configuration kit: subagents, skills, slash commands, rules, hooks and cross-platform automation scripts.",
+  "author": {
+    "name": "brandonktvo-pltc"
+  },
+  "homepage": "https://github.com/brandonktvo-pltc/Robinhood",
+  "repository": "https://github.com/brandonktvo-pltc/Robinhood",
+  "license": "MIT",
+  "keywords": [
+    "claude-code",
+    "agents",
+    "skills",
+    "hooks",
+    "tdd",
+    "code-review",
+    "security"
+  ],
+  "commands": "./commands",
+  "agents": "./agents",
+  "skills": "./skills",
+  "hooks": "./hooks/hooks.json",
+  "mcpServers": "./mcp-configs/mcp-servers.json"
+}

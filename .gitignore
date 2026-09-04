@@ -1,0 +1,24 @@
+# Claude Code session state written by this plugin's hooks
+.claude/memory/
+.claude/package-manager.json
+.claude/settings.local.json
+
+# Dependencies
+node_modules/
+
+# Environment
+.env
+.env.*
+!.env.example
+
+# Editor and OS
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/*
+!.vscode/extensions.json
+
+# Logs and coverage
+*.log
+npm-debug.log*
+coverage/

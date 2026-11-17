@@ -11,8 +11,16 @@ snippets: `node tests/run-all.js` exercises them end to end.
 
 ## Install
 
+One step, on Claude Code 2.1.275 or later:
+
 ```bash
 # In Claude Code
+/plugin install everything-claude-code --marketplace brandonktvo-pltc/Robinhood
+```
+
+On an older Claude Code, add the marketplace first:
+
+```bash
 /plugin marketplace add brandonktvo-pltc/Robinhood
 /plugin install everything-claude-code
 ```

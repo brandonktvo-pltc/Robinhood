@@ -191,13 +191,20 @@ module.exports = {
       }
     },
 
-    'the Claude Code CLI validates the manifests in strict mode': () => {
+    'the Claude Code CLI finds no errors in the manifests': () => {
       // The real schema check. `agents` as a directory string passes every
       // hand-rolled assertion above and is still rejected here, which is
       // exactly why this case exists. Skipped when the CLI is unavailable.
+      //
+      // Deliberately NOT --strict. Strict promotes warnings to failures, and
+      // the validator's warning set grows with each Claude Code release —
+      // naming opinions, a missing listing icon. Those are worth reading but
+      // they are not defects in this plugin, and gating the suite on them
+      // means the suite breaks on CLI updates rather than on our own changes.
+      // Schema breakage, the thing this guards, is reported as an error.
       if (!commandExists('claude')) return;
 
-      const result = spawnSync('claude', ['plugin', 'validate', ROOT, '--strict', '--json'], {
+      const result = spawnSync('claude', ['plugin', 'validate', ROOT, '--json'], {
         encoding: 'utf8',
         timeout: 60000,
       });
@@ -211,11 +218,9 @@ module.exports = {
         assert.fail('could not parse validator output: ' + (result.stdout || result.stderr));
       }
 
-      assert.equal(
-        report.success,
-        true,
-        'validator errors: ' + JSON.stringify(report.manifest && report.manifest.errors)
-      );
+      const errors = (report.manifest && report.manifest.errors) || [];
+      assert.deepEqual(errors, [], 'validator errors: ' + JSON.stringify(errors));
+      assert.equal(report.success, true, 'validator rejected the manifests');
     },
 
     'every hook script is executable Node with no syntax errors': () => {
